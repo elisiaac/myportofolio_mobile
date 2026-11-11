@@ -87,4 +87,7 @@ Fokus minggu ini adalah membangun fondasi awal aplikasi mobile menggunakan frame
 
     ### Notes: Apa itu `pubspec.yaml`?
         `pubspec.yaml` adalah file konfigurasi utama dalam proyek Flutter (berperan mirip seperti `requirements.txt` pada Django) yang ditulis menggunakan format pengaturan YAML. File ini berfungsi sebagai pusat kendali untuk menyimpan identitas proyek (nama dan versi aplikasi), mendaftarkan *dependencies* atau *package* dari pihak ketiga, serta mengelola aset statis seperti gambar dan *font*.
+
+    ### AI Disclosure
+    Untuk Tugas 7 ini saya tidak menggunakan AI dalam mengerjakannya. Pengerjaan Tugas 7 murni saya lakukan dengan mengikuti panduan dari Tutorial 8 dan juga untuk checklist minimal di Tugas 7 saya lakukan secara manual, di mana untuk tugas mengubah warna dapat saya cari caranya dari website PBP Tugas 7 itu sendiri di "TipPetunjuk Implementasi: Pewarnaan Kartu Tombol yang Rapi". Selain itu saya juga membaca materi yang disediakan dari PPT belajar di kelas.
 </details>
