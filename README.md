@@ -40,6 +40,9 @@ Untuk menjalankan proyek Flutter ini secara lokal, ikuti instruksi berikut:
 ### Week 1
 Fokus minggu ini adalah membangun fondasi awal aplikasi mobile menggunakan framework Flutter. Saya melakukan setup lingkungan pengembangan (Flutter SDK dan konfigurasi path), lalu memisahkan komponen tampilan utama ke dalam menu.dart dengan konsep clean code. Sifat halaman diubah menjadi StatelessWidget karena UI hanya menampilkan data statis. Selain itu, saya merancang InfoCard untuk menampilkan identitas diri dan ItemCard sebagai tombol navigasi interaktif. Setiap tombol dikustomisasi dengan background color yang berbeda melalui atribut model, dan dilengkapi dengan feedback visual berupa SnackBar saat ditekan. Proyek ini diakhiri dengan static code analysis menggunakan flutter analyze untuk memastikan kode bersih dari isu.
 
+### Week 2
+Pada minggu kedua pengembangan mobile ini, progres utama saya adalah mengubah aplikasi yang statis menjadi interaktif dan terstruktur. Saya telah membuat sistem navigasi multi-halaman menggunakan `Drawer` dan `Navigator`, serta membuat formulir interaktif yang dilengkapi dengan validasi input yang aman. Selain itu, UI (antarmuka) aplikasi kini lebih responsif dengan adanya umpan balik visual yang berupa SnackBar dan AlertDialog, lalu adanya arsitektur yang lebih bersih karena dipisah ke dalam folder screens/ dan widgets/. Untuk tugas 8 ini saya membuat form baru untuk experience.
+
 
 ## 💭 Pertanyaan Reflektif
 <details>
@@ -90,4 +93,29 @@ Fokus minggu ini adalah membangun fondasi awal aplikasi mobile menggunakan frame
 
     ### AI Disclosure
     Untuk Tugas 7 ini saya tidak menggunakan AI dalam mengerjakannya. Pengerjaan Tugas 7 murni saya lakukan dengan mengikuti panduan dari Tutorial 8 dan juga untuk checklist minimal di Tugas 7 saya lakukan secara manual, di mana untuk tugas mengubah warna dapat saya cari caranya dari website PBP Tugas 7 itu sendiri di "TipPetunjuk Implementasi: Pewarnaan Kartu Tombol yang Rapi". Selain itu saya juga membaca materi yang disediakan dari PPT belajar di kelas.
+</details>
+
+<details>
+<summary><h3>Tugas 8</h3></summary>
+
+1. Jelaskan perbedaan antara Navigator.push(), Navigator.pushReplacement(), dan Navigator.pop(). Metode apa yang digunakan untuk membuka formulir dari kartu aksi? Jelaskan juga bagaimana opsi Home di drawer membawa pengguna kembali ke halaman utama.
+    - `Navigator.push()`: Digunakan untuk menambahkan (menumpuk) halaman baru di atas tumpukan navigasi saat ini, sehingga memunculkan tombol *Back* bawaan untuk kembali.
+    - `Navigator.pushReplacement()`: Mengganti halaman saat ini dengan halaman baru di tumpukan navigasi, sehingga pengguna tidak bisa menekan *Back* ke halaman sebelumnya.
+    - `Navigator.pop()`: Menghapus halaman teratas dari tumpukan navigasi, yang efeknya sama dengan menekan tombol *Back* (kembali ke halaman sebelumnya).
+    Untuk membuka formulir dari kartu aksi, saya menggunakan `Navigator.push()`. Sedangkan opsi Home di drawer menggunakan navigasi (biasanya `pushReplacement`) yang mengarahkan ulang pengguna langsung ke halaman utama (`MyHomePage`).
+
+2. Bagaimana susunan Scaffold, AppBar, dan Drawer membantu menjaga struktur halaman tetap konsisten? Berikan satu contoh penggunaan warna tema portofolio di lebih dari satu halaman.
+    `Scaffold` menyediakan kerangka halaman standarnya, kalau `AppBar` memberikan header yang posisinya tetap di bagian atas, dan `Drawer` menyediakan menu navigasi di samping. Dengan memanggil ketiga *widget* ini di setiap halaman (*screens*), struktur UI aplikasi akan tetap seragam dan pengguna tidak merasa bingung/berpindah ke jalur yang salah. Contoh penggunaan warna tema adalah penerapan `Colors.indigo` (atau `Theme.of(context).colorScheme.primary`) yang digunakan secara konsisten pada latar belakang `AppBar` dan warna tombol *Save* di seluruh halaman porto mobile saya.
+
+3. Mengapa tata letak tersebut dipilih untuk formulir? Jelaskan peran widget pengatur jarak dan widget penggulir ketika ruang layar terbatas.
+    Tata letak menggunakan `Column` yang dibungkus dengan `SingleChildScrollView` (penggulir). Hal ini sangat krusial agar ketika ruang layar terbatas (misalnya dibuka di HP dengan layar sempit) atau ketika papan ketik virtual (keyboard) muncul, layar tetap bisa di-*scroll* ke bawah untuk menjangkau tombol *Save* di bawah dan mencegah *error overflow*. Widget pengatur jarak seperti `Padding` digunakan agar *input field* yg dibuat tidak saling menempel, sehingga lebih rapi (simpelnya tidak berantakan) dan mudah ditekan oleh jari user.
+
+4. Apa peran GlobalKey<FormState>, validator, dan validate() saat tombol Simpan ditekan? Berikan satu contoh nilai yang ditolak oleh validasi dan jelaskan mengapa memilih jenis input atau papan ketik saja belum cukup.
+    `GlobalKey<FormState>` berfungsi sebagai pengenal unik form agar saat tombol `Save` ditekan, fungsi validate() bisa memanggil semua validator untuk mengecek isian dari user secara bersamaan atau serentak. Contoh nilai yang ditolak oleh validasi ini adalah input yang hanya berisi spasi kosong ("   "). Kita tidak akan bisa hanya mengandalkan pembatasan jenis input atau keyboard karena keyboard hanya membatasi tombol apa yang bisa diketik, tapi tidak ada logika untuk mengecek apakah isiannya itu bermakna, sesuai syarat, atau malah sengaja dikosongkan, sehingga peran validator tetaplah dibutuhkan.
+
+    ### AI Disclosure
+    Untuk Tugas 8 ini saya tidak menggunakan AI dalam mengerjakannya. Pengerjaan Tugas 8 saya lakukan dengan mengikuti panduan dari Tutorial 9 dan juga untuk checklist minimal di Tugas 8 saya lakukan secara manual, di mana untuk mengimplementasikan form baru saya lakukan dengan mencontoh langkah-langkah dan form project yang sudah dijelaskan di tutorial 9.
+
+    Thank youuuuu^^
+
 </details>
