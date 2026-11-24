@@ -19,6 +19,8 @@ analyzer:
     - macos/**
     - linux/**
     - "**/*.g.dart"
+  errors:
+    deprecated_member_use: ignore
 
 linter:
   # The lint rules applied to this project can be customized in the
