@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import'package:myportofolio_mobile/widgets/left_drawer.dart'; // Menggunakan drawer yang sama
+import 'package:myportofolio_mobile/widgets/left_drawer.dart'; // Menggunakan drawer yang sama
 
 class ExperienceFormPage extends StatefulWidget {
   const ExperienceFormPage({super.key});
@@ -20,16 +20,15 @@ class _ExperienceFormPageState extends State<ExperienceFormPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Center(
-          child: Text('Add Experience Form'),
-        ),
+        title: const Center(child: Text('Add Experience Form')),
         backgroundColor: Colors.indigo,
         foregroundColor: Colors.white,
       ),
       drawer: const LeftDrawer(), // Drawer yang konsisten dengan halaman utama
       body: Form(
         key: _formKey,
-        child: SingleChildScrollView( // Agar bisa di-scroll di layar sempit
+        child: SingleChildScrollView(
+          // Agar bisa di-scroll di layar sempit
           child: Padding(
             padding: const EdgeInsets.all(16.0), // Padding utama form
             child: Column(
@@ -150,7 +149,9 @@ class _ExperienceFormPageState extends State<ExperienceFormPage> {
                           context: context,
                           builder: (context) {
                             return AlertDialog(
-                              title: const Text('Pengalaman Berhasil Ditambahkan!'),
+                              title: const Text(
+                                'Pengalaman Berhasil Ditambahkan!',
+                              ),
                               content: SingleChildScrollView(
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -167,7 +168,8 @@ class _ExperienceFormPageState extends State<ExperienceFormPage> {
                                   child: const Text('OK'),
                                   onPressed: () {
                                     Navigator.pop(context); // Tutup dialog
-                                    _formKey.currentState!.reset(); // Reset form
+                                    _formKey.currentState!
+                                        .reset(); // Reset form
                                   },
                                 ),
                               ],
@@ -177,7 +179,10 @@ class _ExperienceFormPageState extends State<ExperienceFormPage> {
                       }
                     },
                     child: const Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 24.0, vertical: 12.0),
+                      padding: EdgeInsets.symmetric(
+                        horizontal: 24.0,
+                        vertical: 12.0,
+                      ),
                       child: Text(
                         "Save",
                         style: TextStyle(color: Colors.white, fontSize: 16),

@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:myportofolio_mobile/screens/project_form.dart';
 import 'package:myportofolio_mobile/screens/experience_form.dart';
+import 'package:myportofolio_mobile/screens/project_form.dart';
+import 'package:myportofolio_mobile/screens/project_list_screen.dart';
+import 'package:myportofolio_mobile/services/auth_state.dart';
+import 'package:myportofolio_mobile/widgets/auth_guard.dart';
+import 'package:provider/provider.dart';
 
 class ItemHomepage {
   final String name;
@@ -17,50 +21,62 @@ class ItemCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Material(
-      // Menggunakan atribut warna dari item model, bukan dari Theme
       color: item.color,
       borderRadius: BorderRadius.circular(12),
       child: InkWell(
-        // Aksi ketika kartu ditekan oleh pengguna.
-        onTap: () {
-          // Menampilkan SnackBar dengan pesan interaktif.
+        onTap: () async {
           ScaffoldMessenger.of(context)
             ..hideCurrentSnackBar()
             ..showSnackBar(
-              SnackBar(content: Text("Kamu telah menekan tombol ${item.name}!"))
-            );
-
-        // Navigasi ke halaman ProjectFormPage
-          if (item.name == "Tambah Project") {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => const ProjectFormPage(),
+              SnackBar(
+                content: Text("Kamu telah menekan tombol ${item.name}!"),
               ),
             );
-          }
-          // Navigasi ke halaman ExperienceFormPage
-          if (item.name == "Tambah Pengalaman") {
+
+          if (item.name == "Tambah Project") {
+            final allowed = await ensureLoggedIn(context);
+            if (!allowed || !context.mounted) return;
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const ProjectFormPage()),
+            );
+          } else if (item.name == "Tambah Pengalaman") {
             Navigator.push(
               context,
               MaterialPageRoute(
                 builder: (context) => const ExperienceFormPage(),
               ),
             );
+          } else if (item.name == "Lihat Project" ||
+              item.name == "Lihat Proyek") {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const ProjectListScreen(),
+              ),
+            );
+          } else if (item.name == "Logout") {
+            final authState = context.read<AuthState>();
+            if (!authState.isLoggedIn) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(content: Text("Kamu belum login.")),
+              );
+              return;
+            }
+            await authState.logout();
+            if (!context.mounted) return;
+            ScaffoldMessenger.of(
+              context,
+            ).showSnackBar(const SnackBar(content: Text("Berhasil logout!")));
           }
         },
-
         child: Container(
           padding: const EdgeInsets.all(8),
           child: Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Icon(
-                  item.icon,
-                  color: Colors.white,
-                  size: 30.0,
-                ),
+                Icon(item.icon, color: Colors.white, size: 30.0),
                 const Padding(padding: EdgeInsets.all(3)),
                 Text(
                   item.name,
